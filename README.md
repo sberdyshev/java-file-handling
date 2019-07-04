@@ -63,29 +63,4 @@
 #### MVP
 ##### Шаг 1
 
-@startuml
-
-Alice -> Bob: Authentication Request
-
-alt successful case
-
-	Bob -> Alice: Authentication Accepted
-
-else some kind of failure
-
-	Bob -> Alice: Authentication Failure
-	group My own label
-		Alice -> Log : Log attack start
-	    loop 1000 times
-	        Alice -> Bob: DNS Attack
-	    end
-		Alice -> Log : Log attack end
-	end
-
-else Another type of failure
-
-   Bob -> Alice: Please repeat
-
-end
-
-@enduml
+![PlantUML model](http://www.plantuml.com/plantuml/png/5Oqx4eCm30Nxd28vW56VYgi8Is1dX63q8PFR1rTltXQximTQv2wFLzSgIPmcpnPn-Xl0y3jjFLekwMprq62DgHux-C96FszymGSlB6iNBWsLfEi6AsEaCPo2EkI5Ecw6Umds03ggmqrXlEaSyPcLxlq3)
