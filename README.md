@@ -89,7 +89,7 @@
 
 Модульная схема приложения (пока пробная заглушка, заменю):
 
-![PlantUML model](http://www.plantuml.com/plantuml/png/5Oqx4eCm30Nxd28vW56VYgi8Is1dX63q8PFR1rTltXQximTQv2wFLzSgIPmcpnPn-Xl0y3jjFLekwMprq62DgHux-C96FszymGSlB6iNBWsLfEi6AsEaCPo2EkI5Ecw6Umds03ggmqrXlEaSyPcLxlq3)
+![PlantUML model](http://www.plantuml.com/plantuml/png/3ScxjOCm303GLTuR0AjFoH3fZQLW9RBCqGTEjW_jlV-iJH8fJVvwnE4F0AjNsJbwRkbaRMgGHcbpW6za-FLE9xphMPSN2oszAWhh3gDwa07Evf13O4qMl6ELsJvFfgiSD_y0)
 
 ##### Технологический стек MVP:
 1. Java 1.8
@@ -139,3 +139,12 @@ MVP в отношении инфраструктурных сервисов:
 - не будет обеспечивать мониторинг
 - не будет обеспечивать отказоусточивать
 - будет разворачиваться "as is" в качестве процессов-демонов (за исключение клиентского приложения). Использование контейнеров и средств управления контейнерами в MVP не предусмотрено.
+
+#### Реализация функциональных требований
+##### Аутентификация
+
+![PlantUML model](http://www.plantuml.com/plantuml/png/5SszjS8m343X_atn621HJvM23PX0aKKiZYq7_OJ3zeJgTlTRFD0YU_kxY5BBmcdjlqRiVWKmVC-RHCqrdOs61clCD3huobO-Nlc09nuuFQJnL55B4zsWemSRb44EvnimexA648OClVChMOblWfjXd_SVlx2Miry0)
+
+##### Удаление файла с сервера
+
+![PlantUML model](http://www.plantuml.com/plantuml/png/5Osx4S8m40Lpge02xCk9730qG0LdwM69aSxcFcRe7XDjihCxcRDwz7QwL4ajCaBRkRXlTYLI_enBzH9p63IjuX0Vqzh9PcZ-Mi5EBzvvUDQ6eR3aLcMXpkPGocioEjgKqU2u7yu3xu0at2elodtS_ki9aW_-0000)
