@@ -1,0 +1,18 @@
+@startuml
+
+User -> ClientApp: логин, пароль
+ClientApp -> AuthService: логин, пароль
+AuthService -> AuthDB: логин, пароль
+AuthDB --> AuthService: результат проверки
+
+
+alt пользователь найден
+    AuthService -> AuthService: выпустить токен
+    AuthService --> ClientApp: токен
+    ClientApp --> User: сообщение об успешности входа
+else пользователь не найден
+    AuthService --> ClientApp: сообщение об ошибке
+    ClientApp --> User: сообщение об ошибке
+end
+
+@enduml

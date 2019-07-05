@@ -1,26 +1,50 @@
 @startuml
+skinparam componentStyle uml2
 
-Alice -> Bob: Authentication Request
+package "Client" {
+  [KeyStore]
+	[ClientApp] as ClientApp
+}
 
-alt successful case
+interface "TCP" as TCPAuthServiceAPI
+interface "TCP" as TCPFileDeletorAPI
+interface "TCP" as TCPFileFetcherAPI
+interface "TCP" as TCPFileCreatorAPI
 
-	Bob -> Alice: Authentication Accepted
+package "Server" as Server {
+	[AuthService] as AuthService
+	[FileDeletor] as FileDeletor
+	[FileFetcher] as FileFetcher
+	[FileCreator] as FileCreator
+	database "HDFS" as HDFS
+	interface "Java API" as HDFSJavaAPI
+	database "AuthDB" as AuthDB
+	interface "Java API" as AuthDBJavaAPI
+}
 
-else some kind of failure
+ClientApp -down-> TCPAuthServiceAPI
+ClientApp -down-> TCPFileFetcherAPI
+ClientApp -down-> TCPFileCreatorAPI
+ClientApp -down-> TCPFileDeletorAPI
 
-	Bob -> Alice: Authentication Failure
-	group My own label
-		Alice -> Log : Log attack start
-	    loop 1000 times
-	        Alice -> Bob: DNS Attack
-	    end
-		Alice -> Log : Log attack end
-	end
+TCPAuthServiceAPI -down- AuthService
+TCPFileDeletorAPI -down- FileDeletor
+TCPFileFetcherAPI -down- FileFetcher
+TCPFileCreatorAPI -down- FileCreator
 
-else Another type of failure
+HDFSJavaAPI -down- HDFS
+AuthDBJavaAPI -down- AuthDB
 
-   Bob -> Alice: Please repeat
+FileFetcher --> HDFSJavaAPI
+FileCreator --> HDFSJavaAPI
+FileDeletor --> HDFSJavaAPI
+AuthService --> AuthDBJavaAPI
 
-end
+ClientApp -[hidden]right- KeyStore
+AuthService -[hidden]right- FileDeletor
+FileDeletor -[hidden]right- FileFetcher
+FileFetcher -[hidden]right- FileCreator
+Client -[hidden]down- Server
+FileFetcher -[hidden]down- HDFSJavaAPI
 
 @enduml
