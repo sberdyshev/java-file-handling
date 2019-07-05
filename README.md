@@ -87,6 +87,7 @@
 
 Персональные данные будут храниться в специализированном ПО. В данный момент идет выбор между HashiCorp Vault и KeyCloak. Выбор зависит от способа аутентификации, которая так же еще не определена.
 
+Модульная схема приложения (пока пробная заглушка, заменю):
 ![PlantUML model](http://www.plantuml.com/plantuml/png/5Oqx4eCm30Nxd28vW56VYgi8Is1dX63q8PFR1rTltXQximTQv2wFLzSgIPmcpnPn-Xl0y3jjFLekwMprq62DgHux-C96FszymGSlB6iNBWsLfEi6AsEaCPo2EkI5Ecw6Umds03ggmqrXlEaSyPcLxlq3)
 
 ##### Технологический стек MVP:
