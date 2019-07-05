@@ -1,0 +1,27 @@
+@startuml
+
+User -> ClientApp: имя файла, имя пользователя
+ClientApp -> FileDeletor: имя файла, имя пользователя, токен
+
+alt FileDeletor доступен
+  FileDeletor -> FileDeletor: проверка токена
+    alt токен валиден
+      FileDeletor -> HDFS: идентификатор файла
+        alt HDFS доступен
+          HDFS -> HDFS: удаление файла
+          HDFS --> FileDeletor: результат удаления
+          FileDeletor --> ClientApp: результат удаления
+          ClientApp --> User: результат удаления
+        else HDFS не доступен
+          FileDeletor --> ClientApp: сообщение об ошибке
+          ClientApp --> User: сообщение об ошибке
+        end
+    else токен не валиден или отсутствует
+      FileDeletor --> ClientApp: сообщение об ошибке
+      ClientApp --> User: сообщение об ошибке
+    end
+else FileDeletor не доступен
+    ClientApp --> User: сообщение об ошибке
+end
+
+@enduml
