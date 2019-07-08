@@ -141,10 +141,35 @@ MVP в отношении инфраструктурных сервисов:
 - будет разворачиваться "as is" в качестве процессов-демонов (за исключение клиентского приложения). Использование контейнеров и средств управления контейнерами в MVP не предусмотрено.
 
 #### Реализация функциональных требований
+
+Механизм реализации функциональных требований отражен на диаграммах последовательности ниже. Для упрощения документации диаграммы последовательности также содержат алгоритм реализации функциональных требований.
+
 ##### Аутентификация
 
-![PlantUML model](http://www.plantuml.com/plantuml/png/5SszjS8m343X_atn621HJvM23PX0aKKiZYq7_OJ3zeJgTlTRFD0YU_kxY5BBmcdjlqRiVWKmVC-RHCqrdOs61clCD3huobO-Nlc09nuuFQJnL55B4zsWemSRb44EvnimexA648OClVChMOblWfjXd_SVlx2Miry0)
+Схема механизма и алгоритма аутентификации:
+
+![PlantUML model](http://www.plantuml.com/plantuml/png/BOuzai8m34RxFSLkiMKYXf8g1JVW18ejOZ6s7FGJXjiJ1ggl-DwyUPCvgaUhFtyigKQcqFfRt5Sx0IW-neMzn1n6cheuYO-fDx2PD3-jq0Ott72uSgMXeEJAia13SrB8FHdiRZ2w1qcY_-CXCowApG332ubpGkSkbozn_jpZ-awQIFA-Bm00)
 
 ##### Удаление файла с сервера
 
+Схема механизма и алгоритма удаления файла с сервера:
+
 ![PlantUML model](http://www.plantuml.com/plantuml/png/5Osx4S8m40Lpge02xCk9730qG0LdwM69aSxcFcRe7XDjihCxcRDwz7QwL4ajCaBRkRXlTYLI_enBzH9p63IjuX0Vqzh9PcZ-Mi5EBzvvUDQ6eR3aLcMXpkPGocioEjgKqU2u7yu3xu0at2elodtS_ki9aW_-0000)
+
+##### Получение файла с сервера
+
+Схема механизма и алгоритма получения файла с сервера:
+
+![PlantUML model](http://www.plantuml.com/plantuml/png/BSux3i8m40JGdbD0GPaiegHAWRW09zZOczZ8teJz175xZA2Qucb6CwYXcDUoEsGEnIEvb7qoM_K28FZgvsp9HrUIiB0HMn-M2ZgInBScsk216tPJBjGbv5Wopr1HZGJY4XJQDYWzdJZGyNoA6MV1gZ2HXNHhjViVhp_fr--RWJYs_000)
+
+##### Получение списка файлов с сервера
+
+Схема механизма и алгоритма получения списка файлов с сервера:
+
+![PlantUML model](http://www.plantuml.com/plantuml/png/BOwnhi8m34NtznMFWR4rOcJgW9ZO-08tSHkZn2csKyJVKmJJ7UxHqHdCKRsL_BTZ2Rb5Qfh_a_jY9m35Pp-pfpOs8mrLdCJxK0lOI1fVbcY5EwxOJPofIoWniynGq9mKOWq6cnkC7eqaqFvuY8opOZ6Oo4EwSAOhczz-mFdxzikdQ229sxu1)
+
+##### Запись файла на сервер
+
+Схема механизма и алгоритма записи файла на сервер:
+
+![PlantUML model](http://www.plantuml.com/plantuml/png/BSunhi8m40JG_f_YKr0cYoYfKY0km0aszX0RsPkmkmxYzWH1DSNJZ6OmP_LMozykIoWjecdvJ-wBdOYKd_sKFRMn6JJCuX3lmrp9HcXyMS9ATrwvk-M2Bh74acMYokPGYdCmshR9y6YGWFtn43DFojKeADXnsNhNdvw_r2-VEmCaRla6)
