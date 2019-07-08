@@ -1,0 +1,41 @@
+@startuml
+
+User -[hidden]-> User ++ #yellow
+User -> ClientApp ++ #green: имя файла
+ClientApp ->o FileDeletor ++ #red: установка соединения
+
+
+alt FileDeletor доступен
+  ClientApp -> FileDeletor: имя файла, логин пользователя, токен, команда, версия сервиса
+  FileDeletor -> FileDeletor: проверка токена
+    alt токен валиден
+      FileDeletor -> FileDeletor: валидация команды
+      alt команда валидна
+        FileDeletor -> HDFS ++ #white: идентификатор файла, команда
+        alt HDFS доступен
+          HDFS -> HDFS: удаление файла
+          HDFS --> FileDeletor  -- #white: результат удаления
+          FileDeletor --> ClientApp: результат удаления
+          ClientApp --> User: результат удаления
+          ClientApp ->x FileDeletor: разрыв соединения
+        else HDFS не доступен
+          FileDeletor --> ClientApp: сообщение об ошибке
+          ClientApp --> User: сообщение об ошибке
+          ClientApp ->x FileDeletor: разрыв соединения
+        end
+        else команда не валидна
+          FileDeletor --> ClientApp: сообщение об ошибке
+          ClientApp --> User: сообщение об ошибке
+          ClientApp ->x FileDeletor: разрыв соединения
+        end
+    else токен не валиден или отсутствует
+      FileDeletor --> ClientApp -- #red: сообщение об ошибке
+      ClientApp --> User: сообщение об ошибке
+      ClientApp ->x FileDeletor: разрыв соединения
+    end
+else FileDeletor не доступен
+    ClientApp --> User -- #green: сообщение об ошибке
+end
+User -[hidden]-> User -- #yellow
+
+@enduml
