@@ -1,0 +1,46 @@
+@startuml
+
+User -[hidden]-> User ++ #yellow
+User -> ClientApp ++ #green: имя файла
+ClientApp ->o FileCreator ++ #red: установка соединения
+
+alt FileCreator доступен
+  ClientApp -> FileCreator: имя файла, логин пользователя, токен, команда, версия сервиса
+  FileCreator -> FileCreator: проверка токена
+    alt токен валиден
+      FileCreator -> FileCreator: валидация команды
+      alt команда валидна
+          FileCreator -> HDFS ++ #white: идентификатор файла, команда
+          alt HDFS доступен
+            HDFS -> HDFS: создание файла
+            HDFS --> FileCreator -- #white: результат создания
+            FileCreator -> FileCreator: переход в режим принятия данных файла
+            FileCreator --> ClientApp: подтверждение готовности принимать файл
+            loop передача файла
+              ClientApp -> FileCreator: потоковая передача данных файла
+              FileCreator -> HDFS: append данных в файл
+            end loop
+            ClientApp ->x FileCreator: разрыв соединения
+            FileCreator -> FileCreator: переход в ожидание приема команды
+            ClientApp --> User: уведомление о создании файла
+          else HDFS не доступен
+            FileCreator --> ClientApp: сообщение об ошибке
+            ClientApp --> User: сообщение об ошибке
+            ClientApp ->x FileCreator: разрыв соединения
+          end
+      else команда не валидна
+        FileCreator --> ClientApp: сообщение об ошибке
+        ClientApp --> User: сообщение об ошибке
+        ClientApp ->x FileCreator: разрыв соединения
+      end
+    else токен не валиден или отсутствует
+      FileCreator --> ClientApp -- #white: сообщение об ошибке
+      ClientApp --> User: сообщение об ошибке
+      ClientApp ->x FileCreator: разрыв соединения
+    end
+else FileCreator не доступен
+  ClientApp --> User -- #green: сообщение об ошибке
+end
+User -[hidden]-> User -- #yellow
+
+@enduml

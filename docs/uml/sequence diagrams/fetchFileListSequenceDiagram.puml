@@ -1,0 +1,39 @@
+@startuml
+
+User -[hidden]-> User ++ #yellow
+User -> ClientApp ++ #green: имя файла
+ClientApp ->o FileFetcher ++ #red: установка соединения
+
+alt FileFetcher доступен
+  ClientApp -> FileFetcher: имя файла, логин пользователя, токен, команда, версия сервиса
+  FileFetcher -> FileFetcher: проверка токена
+    alt токен валиден
+      FileFetcher -> FileFetcher: валидация команды
+      alt команда валидна
+          FileFetcher -> HDFS ++ #white: директория, команда
+          alt HDFS доступен
+            HDFS -> FileFetcher -- #white: список файлов
+            FileFetcher -> ClientApp: список файлов
+            ClientApp --> User: список файлов
+            ClientApp ->x FileFetcher: разрыв соединения
+          else HDFS не доступен
+            FileFetcher --> ClientApp: сообщение об ошибке
+            ClientApp --> User: сообщение об ошибке
+            ClientApp ->x FileFetcher: разрыв соединения
+          end
+      else команда не валидна
+        FileFetcher --> ClientApp: сообщение об ошибке
+        ClientApp --> User: сообщение об ошибке
+        ClientApp ->x FileFetcher: разрыв соединения
+      end
+    else токен не валиден или отсутствует
+      FileFetcher --> ClientApp -- #white: сообщение об ошибке
+      ClientApp --> User: сообщение об ошибке
+      ClientApp ->x FileFetcher: разрыв соединения
+    end
+else FileFetcher не доступен
+  ClientApp --> User -- : сообщение об ошибке
+end
+User -[hidden]-> User --
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+
+User -[hidden]-> User ++ #yellow
+User -> ClientApp ++ #green: логин, пароль
+ClientApp ->o AuthService ++ #red: установка соединения
+
+alt AuthService доступен
+    ClientApp -> AuthService: логин, пароль, команда, версия сервиса
+    alt AuthDB доступна
+        AuthService -> AuthDB ++ #white: логин, пароль
+        AuthDB --> AuthService -- #white: результат проверки
+        alt пользователь найден
+            AuthService -> AuthService: выпустить токен
+            AuthService --> ClientApp: токен
+            ClientApp --> User: сообщение об успешности аутентификации
+            ClientApp ->x AuthService: разрыв соединения
+        else пользователь не найден
+            AuthService --> ClientApp: сообщение об ошибке
+            ClientApp --> User: сообщение об ошибке
+            ClientApp ->x AuthService: разрыв соединения
+        end
+    else AuthDB не доступна
+        AuthService --> ClientApp -- #red: сообщение об ошибке
+        ClientApp --> User: сообщение об ошибке
+        ClientApp ->x AuthService: разрыв соединения
+    end
+else AuthService не доступен
+    ClientApp --> User -- #green: сообщение об ошибке
+end
+User -[hidden]-> User -- #yellow
+
+
+@enduml
