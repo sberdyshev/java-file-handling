@@ -7,7 +7,7 @@ ClientApp -> ClientApp: валидация команды
 alt команда валидна
   ClientApp ->o FileFetcher ++ #red: установка соединения
   alt FileFetcher доступен
-    ClientApp -> FileFetcher: имя файла, логин пользователя, токен, команда, версия сервиса
+    ClientApp -> FileFetcher: логин пользователя, токен, команда, версия сервиса
     FileFetcher -> FileFetcher: проверка токена
     alt токен валиден
       FileFetcher -> FileFetcher: валидация команды
