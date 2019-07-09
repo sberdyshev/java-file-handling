@@ -107,7 +107,7 @@
 
 Персональные данные будут храниться в специализированном ПО. В данный момент идет выбор между HashiCorp Vault и KeyCloak. Выбор зависит от способа аутентификации, которая так же еще не определена.
 
-Модульная схема приложения (пока пробная заглушка, заменю):
+Модульная схема приложения:
 
 ![PlantUML model](http://www.plantuml.com/plantuml/png/3ScxjOCm303GLTuR0AjFoH3fZQLW9RBCqGTEjW_jlV-iJH8fJVvwnE4F0AjNsJbwRkbaRMgGHcbpW6za-FLE9xphMPSN2oszAWhh3gDwa07Evf13O4qMl6ELsJvFfgiSD_y0)
 
@@ -213,7 +213,7 @@ MVP в отношении инфраструктурных сервисов:
 
 Схема механизма и алгоритма аутентификации:
 
-![PlantUML model](http://www.plantuml.com/plantuml/svg/BOuzai8m34RxFSLkiMKYXf8g1JVW18ejOZ6s7FGJXjiJ1ggl-DwyUPCvgaUhFtyigKQcqFfRt5Sx0IW-neMzn1n6cheuYO-fDx2PD3-jq0Ott72uSgMXeEJAia13SrB8FHdiRZ2w1qcY_-CXCowApG332ubpGkSkbozn_jpZ-awQIFA-Bm00)
+![PlantUML model](http://www.plantuml.com/plantuml/png/BOuzai8m34RxFSLkiMKYXf8g1JVW18ejOZ6s7FGJXjiJ1ggl-DwyUPCvgaUhFtyigKQcqFfRt5Sx0IW-neMzn1n6cheuYO-fDx2PD3-jq0Ott72uSgMXeEJAia13SrB8FHdiRZ2w1qcY_-CXCowApG332ubpGkSkbozn_jpZ-awQIFA-Bm00)
 
 ###### 2.1.2.2.1. Формат команды аутентификации
 <sub><sup> [К оглавлению.](#0-оглавление) </sup></sub><br/>
@@ -237,7 +237,7 @@ MVP в отношении инфраструктурных сервисов:
 
 Схема механизма и алгоритма удаления файла с сервера:
 
-![PlantUML model](http://www.plantuml.com/plantuml/svg/BSun3i8m34RXdLF0mDWQCJ9rG5o04xZ9JnFaf2MsYxWz89ZUy2rlKEDcNcIpopM8HtYJRJ9Rz4JK-DbFsPAFhcXXhePgVPWBwOWMNvgmqfrNxcvPq2MkKNATgB0Q6iKvA7aHKZmSDM1_FCJCK-EY524mNBBW-jVpZ_hbkpEWna_V)
+![PlantUML model](http://www.plantuml.com/plantuml/png/BSun3i8m34RXdLF0mDWQCJ9rG5o04xZ9JnFaf2MsYxWz89ZUy2rlKEDcNcIpopM8HtYJRJ9Rz4JK-DbFsPAFhcXXhePgVPWBwOWMNvgmqfrNxcvPq2MkKNATgB0Q6iKvA7aHKZmSDM1_FCJCK-EY524mNBBW-jVpZ_hbkpEWna_V)
 
 ###### 2.1.2.3.1. Формат команды "удаление файла с сервера"
 <sub><sup> [К оглавлению.](#0-оглавление) </sup></sub><br/>
@@ -261,7 +261,7 @@ MVP в отношении инфраструктурных сервисов:
 
 Схема механизма и алгоритма получения файла с сервера:
 
-![PlantUML model](http://www.plantuml.com/plantuml/svg/BSux3i8m40JGdbD0GPaiegHAWRW09zZOczZ8teJz175xZA2Qucb6CwYXcDUoEsGEnIEvb7qoM_K28FZgvsp9HrUIiB0HMn-M2ZgInBScsk216tPJBjGbv5Wopr1HZGJY4XJQDYWzdJZGyNoA6MV1gZ2HXNHhjViVhp_fr--RWJYs_000)
+![PlantUML model](http://www.plantuml.com/plantuml/png/BSux3i8m40JGdbD0GPaiegHAWRW09zZOczZ8teJz175xZA2Qucb6CwYXcDUoEsGEnIEvb7qoM_K28FZgvsp9HrUIiB0HMn-M2ZgInBScsk216tPJBjGbv5Wopr1HZGJY4XJQDYWzdJZGyNoA6MV1gZ2HXNHhjViVhp_fr--RWJYs_000)
 
 ###### 2.1.2.4.1. Формат команды "получение файла с сервера"
 <sub><sup> [К оглавлению.](#0-оглавление) </sup></sub><br/>
@@ -285,7 +285,7 @@ MVP в отношении инфраструктурных сервисов:
 
 Схема механизма и алгоритма получения списка файлов с сервера:
 
-![PlantUML model](http://www.plantuml.com/plantuml/svg/BOwnhi8m34NtznMFWR4rOcJgW9ZO-08tSHkZn2csKyJVKmJJ7UxHqHdCKRsL_BTZ2Rb5Qfh_a_jY9m35Pp-pfpOs8mrLdCJxK0lOI1fVbcY5EwxOJPofIoWniynGq9mKOWq6cnkC7eqaqFvuY8opOZ6Oo4EwSAOhczz-mFdxzikdQ229sxu1)
+![PlantUML model](http://www.plantuml.com/plantuml/png/BOwnhi8m34NtznMFWR4rOcJgW9ZO-08tSHkZn2csKyJVKmJJ7UxHqHdCKRsL_BTZ2Rb5Qfh_a_jY9m35Pp-pfpOs8mrLdCJxK0lOI1fVbcY5EwxOJPofIoWniynGq9mKOWq6cnkC7eqaqFvuY8opOZ6Oo4EwSAOhczz-mFdxzikdQ229sxu1)
 
 ###### 2.1.2.5.1. Формат команды "получение списка файлов с сервера"
 <sub><sup> [К оглавлению.](#0-оглавление) </sup></sub><br/>
