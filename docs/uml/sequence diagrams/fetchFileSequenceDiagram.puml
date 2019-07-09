@@ -1,13 +1,15 @@
 @startuml
 
 User -[hidden]-> User ++ #yellow
-User -> ClientApp ++ #green: имя файла
+User -> ClientApp ++ #green: команда, имя файла
+ClientApp -> ClientApp: валидация команды
 ClientApp -[hidden]-> ClientAppFileSystem
-ClientApp ->o FileFetcher ++ #red: установка соединения
 
-alt FileFetcher доступен
-  ClientApp -> FileFetcher: имя файла, логин пользователя, токен, команда, версия сервиса
-  FileFetcher -> FileFetcher: проверка токена
+alt команда валидна
+  ClientApp ->o FileFetcher ++ #red: установка соединения
+  alt FileFetcher доступен
+    ClientApp -> FileFetcher: имя файла, логин пользователя, токен, команда, версия сервиса
+    FileFetcher -> FileFetcher: проверка токена
     alt токен валиден
       FileFetcher -> FileFetcher: валидация команды
       alt команда валидна
@@ -39,8 +41,11 @@ alt FileFetcher доступен
       ClientApp ->x FileFetcher: разрыв соединения
       FileFetcher -[hidden]-> FileFetcher -- #red
     end
-else FileFetcher не доступен
-  ClientApp --> User -- #green: сообщение об ошибке
+  else FileFetcher не доступен
+    ClientApp --> User: сообщение об ошибке
+  end
+else команда не валидна
+    ClientApp --> User -- #green: сообщение об ошибке
 end
 User -[hidden]-> User -- #yellow
 

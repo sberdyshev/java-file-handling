@@ -1,16 +1,18 @@
 @startuml
 
 User -[hidden]-> User ++ #yellow
-User -> ClientApp ++ #green: имя файла
-ClientApp -[hidden]-> ClientAppFileSystem
-ClientApp ->o FileCreator ++ #red: установка соединения
+User -> ClientApp ++ #green: команда, имя файла
+ClientApp -> ClientApp: валидация команды
 
-alt FileCreator доступен
-  ClientApp -> FileCreator: имя файла, логин пользователя, токен, команда, версия сервиса
-  FileCreator -> FileCreator: проверка токена
-    alt токен валиден
-      FileCreator -> FileCreator: валидация команды
-      alt команда валидна
+alt команда валидна
+  ClientApp -[hidden]-> ClientAppFileSystem
+  ClientApp ->o FileCreator ++ #red: установка соединения
+  alt FileCreator доступен
+    ClientApp -> FileCreator: имя файла, логин пользователя, токен, команда, версия сервиса
+    FileCreator -> FileCreator: проверка токена
+      alt токен валиден
+        FileCreator -> FileCreator: валидация команды
+        alt команда валидна
           FileCreator -> HDFS ++ #white: идентификатор файла, команда
           alt HDFS доступен
             HDFS -> HDFS: создание файла
@@ -30,19 +32,22 @@ alt FileCreator доступен
             ClientApp --> User: сообщение об ошибке
             ClientApp ->x FileCreator: разрыв соединения
           end
-      else команда не валидна
+        else команда не валидна
+          FileCreator --> ClientApp: сообщение об ошибке
+          ClientApp --> User: сообщение об ошибке
+          ClientApp ->x FileCreator: разрыв соединения
+        end
+      else токен не валиден или отсутствует
         FileCreator --> ClientApp: сообщение об ошибке
         ClientApp --> User: сообщение об ошибке
         ClientApp ->x FileCreator: разрыв соединения
+        FileCreator -[hidden]-> FileCreator -- #red
       end
-    else токен не валиден или отсутствует
-      FileCreator --> ClientApp: сообщение об ошибке
+    else FileCreator не доступен
       ClientApp --> User: сообщение об ошибке
-      ClientApp ->x FileCreator: разрыв соединения
-      FileCreator -[hidden]-> FileCreator -- #red
     end
-else FileCreator не доступен
-  ClientApp --> User -- #green: сообщение об ошибке
+else команда не валидна
+    ClientApp --> User -- #green: сообщение об ошибке
 end
 User -[hidden]-> User -- #yellow
 
