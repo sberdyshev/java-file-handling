@@ -309,7 +309,7 @@ MVP в отношении инфраструктурных сервисов:
 
 Схема механизма и алгоритма записи файла на сервер:
 
-![PlantUML model](http://www.plantuml.com/plantuml/svg/BSunhi8m40JG_f_YKr0cYoYfKY0km0aszX0RsPkmkmxYzWH1DSNJZ6OmP_LMozykIoWjecdvJ-wBdOYKd_sKFRMn6JJCuX3lmrp9HcXyMS9ATrwvk-M2Bh74acMYokPGYdCmshR9y6YGWFtn43DFojKeADXnsNhNdvw_r2-VEmCaRla6)
+![PlantUML model](http://www.plantuml.com/plantuml/png/BSunhi8m40JG_f_YKr0cYoYfKY0km0aszX0RsPkmkmxYzWH1DSNJZ6OmP_LMozykIoWjecdvJ-wBdOYKd_sKFRMn6JJCuX3lmrp9HcXyMS9ATrwvk-M2Bh74acMYokPGYdCmshR9y6YGWFtn43DFojKeADXnsNhNdvw_r2-VEmCaRla6)
 
 ###### 2.1.2.6.1. Формат команды "запись файла на сервер"
 <sub><sup> [К оглавлению.](#0-оглавление) </sup></sub><br/>
