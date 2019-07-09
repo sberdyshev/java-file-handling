@@ -14,11 +14,12 @@ alt FileFetcher доступен
           FileFetcher -> HDFS ++ #white: идентификатор файла, команда
           alt HDFS доступен
             loop передача файла
+              HDFS -> HDFS: чтение файла
               HDFS -> FileFetcher: потоковая передача данных файла
               FileFetcher -> ClientApp: потоковая передача данных файла
               ClientApp -> ClientAppFileSystem: потоковая запись данных файла в файл
             end loop
-            HDFS -> FileFetcher: Признак конца файла
+            HDFS -> FileFetcher -- #white: Признак конца файла
             FileFetcher -> ClientApp: Признак конца файла
             ClientApp --> User: уведомление о получении файла
             ClientApp ->x FileFetcher: разрыв соединения
@@ -33,9 +34,10 @@ alt FileFetcher доступен
         ClientApp ->x FileFetcher: разрыв соединения
       end
     else токен не валиден или отсутствует
-      FileFetcher --> ClientApp -- #white: сообщение об ошибке
+      FileFetcher --> ClientApp: сообщение об ошибке
       ClientApp --> User: сообщение об ошибке
       ClientApp ->x FileFetcher: разрыв соединения
+      FileFetcher -[hidden]-> FileFetcher -- #red
     end
 else FileFetcher не доступен
   ClientApp --> User -- #green: сообщение об ошибке

@@ -29,9 +29,10 @@ alt FileDeletor доступен
           ClientApp ->x FileDeletor: разрыв соединения
         end
     else токен не валиден или отсутствует
-      FileDeletor --> ClientApp -- #red: сообщение об ошибке
+      FileDeletor --> ClientApp: сообщение об ошибке
       ClientApp --> User: сообщение об ошибке
       ClientApp ->x FileDeletor: разрыв соединения
+      FileDeletor -[hidden]-> FileDeletor -- #red
     end
 else FileDeletor не доступен
     ClientApp --> User -- #green: сообщение об ошибке

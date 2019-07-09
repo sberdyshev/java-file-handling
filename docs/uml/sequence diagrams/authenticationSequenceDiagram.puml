@@ -8,6 +8,7 @@ alt AuthService доступен
     ClientApp -> AuthService: логин, пароль, команда, версия сервиса
     alt AuthDB доступна
         AuthService -> AuthDB ++ #white: логин, пароль
+        AuthDB -> AuthDB: проверить пользователя
         AuthDB --> AuthService -- #white: результат проверки
         alt пользователь найден
             AuthService -> AuthService: выпустить токен
@@ -20,9 +21,10 @@ alt AuthService доступен
             ClientApp ->x AuthService: разрыв соединения
         end
     else AuthDB не доступна
-        AuthService --> ClientApp -- #red: сообщение об ошибке
+        AuthService --> ClientApp: сообщение об ошибке
         ClientApp --> User: сообщение об ошибке
         ClientApp ->x AuthService: разрыв соединения
+        AuthService -[hidden]-> AuthService -- #red
     end
 else AuthService не доступен
     ClientApp --> User -- #green: сообщение об ошибке

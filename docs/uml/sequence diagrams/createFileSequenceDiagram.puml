@@ -2,6 +2,7 @@
 
 User -[hidden]-> User ++ #yellow
 User -> ClientApp ++ #green: имя файла
+ClientApp -[hidden]-> ClientAppFileSystem
 ClientApp ->o FileCreator ++ #red: установка соединения
 
 alt FileCreator доступен
@@ -17,6 +18,7 @@ alt FileCreator доступен
             FileCreator -> FileCreator: переход в режим принятия данных файла
             FileCreator --> ClientApp: подтверждение готовности принимать файл
             loop передача файла
+              ClientAppFileSystem -> ClientApp: потоковое чтение файла
               ClientApp -> FileCreator: потоковая передача данных файла
               FileCreator -> HDFS: append данных в файл
             end loop
@@ -34,9 +36,10 @@ alt FileCreator доступен
         ClientApp ->x FileCreator: разрыв соединения
       end
     else токен не валиден или отсутствует
-      FileCreator --> ClientApp -- #white: сообщение об ошибке
+      FileCreator --> ClientApp: сообщение об ошибке
       ClientApp --> User: сообщение об ошибке
       ClientApp ->x FileCreator: разрыв соединения
+      FileCreator -[hidden]-> FileCreator -- #red
     end
 else FileCreator не доступен
   ClientApp --> User -- #green: сообщение об ошибке
