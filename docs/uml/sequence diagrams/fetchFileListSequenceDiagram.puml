@@ -12,6 +12,7 @@ alt FileFetcher доступен
       alt команда валидна
           FileFetcher -> HDFS ++ #white: директория, команда
           alt HDFS доступен
+            HDFS -> HDFS: получение списка файлов
             HDFS -> FileFetcher -- #white: список файлов
             FileFetcher -> ClientApp: список файлов
             ClientApp --> User: список файлов
@@ -27,13 +28,14 @@ alt FileFetcher доступен
         ClientApp ->x FileFetcher: разрыв соединения
       end
     else токен не валиден или отсутствует
-      FileFetcher --> ClientApp -- #white: сообщение об ошибке
+      FileFetcher --> ClientApp: сообщение об ошибке
       ClientApp --> User: сообщение об ошибке
       ClientApp ->x FileFetcher: разрыв соединения
+      FileFetcher -[hidden]-> FileFetcher -- #red
     end
 else FileFetcher не доступен
-  ClientApp --> User -- : сообщение об ошибке
+  ClientApp --> User -- #green: сообщение об ошибке
 end
-User -[hidden]-> User --
+User -[hidden]-> User -- #yellow
 
 @enduml
