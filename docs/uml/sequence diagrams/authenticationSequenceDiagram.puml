@@ -1,32 +1,37 @@
 @startuml
 
 User -[hidden]-> User ++ #yellow
-User -> ClientApp ++ #green: логин, пароль
-ClientApp ->o AuthService ++ #red: установка соединения
+User -> ClientApp ++ #green: команда, логин, пароль
+ClientApp -> ClientApp: валидация команды
 
-alt AuthService доступен
-    ClientApp -> AuthService: логин, пароль, команда, версия сервиса
-    alt AuthDB доступна
-        AuthService -> AuthDB ++ #white: логин, пароль
-        AuthDB -> AuthDB: проверить пользователя
-        AuthDB --> AuthService -- #white: результат проверки
-        alt пользователь найден
-            AuthService -> AuthService: выпустить токен
-            AuthService --> ClientApp: токен
-            ClientApp --> User: сообщение об успешности аутентификации
-            ClientApp ->x AuthService: разрыв соединения
-        else пользователь не найден
-            AuthService --> ClientApp: сообщение об ошибке
-            ClientApp --> User: сообщение об ошибке
-            ClientApp ->x AuthService: разрыв соединения
+alt команда валидна
+    ClientApp ->o AuthService ++ #red: установка соединения
+    alt AuthService доступен
+        ClientApp -> AuthService: логин, пароль, команда, версия сервиса
+        alt AuthDB доступна
+            AuthService -> AuthDB ++ #white: логин, пароль
+            AuthDB -> AuthDB: проверить пользователя
+            AuthDB --> AuthService -- #white: результат проверки
+            alt пользователь найден
+              AuthService -> AuthService: выпустить токен
+              AuthService --> ClientApp: токен
+              ClientApp --> User: сообщение об успешности аутентификации
+              ClientApp ->x AuthService: разрыв соединения
+            else пользователь не найден
+              AuthService --> ClientApp: сообщение об ошибке
+              ClientApp --> User: сообщение об ошибке
+              ClientApp ->x AuthService: разрыв соединения
+            end
+        else AuthDB не доступна
+          AuthService --> ClientApp: сообщение об ошибке
+          ClientApp --> User: сообщение об ошибке
+          ClientApp ->x AuthService: разрыв соединения
+          AuthService -[hidden]-> AuthService -- #red
         end
-    else AuthDB не доступна
-        AuthService --> ClientApp: сообщение об ошибке
-        ClientApp --> User: сообщение об ошибке
-        ClientApp ->x AuthService: разрыв соединения
-        AuthService -[hidden]-> AuthService -- #red
+    else AuthService не доступен
+      ClientApp --> User: сообщение об ошибке
     end
-else AuthService не доступен
+else команда не валидна
     ClientApp --> User -- #green: сообщение об ошибке
 end
 User -[hidden]-> User -- #yellow
